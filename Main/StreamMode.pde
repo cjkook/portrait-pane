@@ -1,5 +1,5 @@
 interface StreamMode {
-  boolean isActive = true;
+  boolean isActive();
   void init(Context ctx);
   void update(Context ctx);
   void display(Context ctx);

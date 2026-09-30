@@ -15,7 +15,6 @@ boolean paletteEqual = false;
 color[] paletteColors;
 String[] urls;
 
-
 float[][] contextBounds;
 final int PTTRN_CONTEXT = 0;
 final int MAIN_CONTEXT = 1;
@@ -57,10 +56,6 @@ void setup() {
     contextBounds[SUPP_CONTEXT][1],
     contextBounds[SUPP_CONTEXT][2],
     contextBounds[SUPP_CONTEXT][3], "Support");
-
-  patternContext.addStream(new ParticleStream());
-  mainContext.addStream(new ParticleStream());
-  supportContext.addStream(new ParticleStream());
 
   swatch = new Swatch(0, height - 100, 20, 20, currentPalette, targetPalette);
   
@@ -112,8 +107,8 @@ void draw() {
   spoutC.sendTexture(supportContext.graphics);
 
   if (frameCount % 40 == 0) {
-    // println("FPS: " + int(frameRate));
-    println("frame count: " + frameCount);
+    println("FPS: " + int(frameRate));
+    // println("frame count: " + frameCount);
 
     paletteEqual = Arrays.equals(currentPalette, targetPalette);
 

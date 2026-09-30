@@ -3,7 +3,6 @@ class Context {
   PVector pos;
   PVector size, center;
   PVector origin;
-  PVector xScroll;
   PGraphics graphics;
   ArrayList<StreamMode> streams;
   // Particle[] particles;
@@ -14,11 +13,12 @@ class Context {
     this.size = new PVector(w, h);
     this.center = new PVector(w/2, h/2);
     this.graphics = createGraphics((int)this.size.x, (int)this.size.y, P2D);
-    this.graphics.smooth(8);
+    this.graphics.smooth(4);
     this.streams = new ArrayList<StreamMode>();
 
     // create stream objects
     this.addStream(new ParticleStream());
+    this.addStream(new BoomBoxStream());
     for (StreamMode mode : this.streams) {
       mode.init(this);
     }
@@ -35,14 +35,20 @@ class Context {
 
   void update() {
     for (StreamMode mode : this.streams) {
-      mode.update(this);
+      if (mode.isActive()) {
+        mode.update(this);
+      }
     }
   }
 
   void display() {
+    this.graphics.beginDraw();
+    this.graphics.clear();
+    // this.graphics.background(0);
     for (StreamMode mode : this.streams) {
       mode.display(this);
     }
+    this.graphics.endDraw();
 
     // render to the context graphics
     image(this.graphics, this.pos.x, this.pos.y, this.size.x, this.size.y);

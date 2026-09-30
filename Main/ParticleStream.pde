@@ -1,5 +1,10 @@
 class ParticleStream implements StreamMode {
   Particle[] particles;
+  boolean isActive = true;
+
+  boolean isActive() {
+    return this.isActive;
+  }
 
   void init(Context ctx) {
     particles = new Particle[12];
@@ -19,11 +24,8 @@ class ParticleStream implements StreamMode {
   }
 
   void display(Context ctx) {
-    ctx.graphics.beginDraw();
-    ctx.graphics.clear();
     for (int i = 0; i < this.particles.length; i++) {
       this.particles[i].display();
     }
-    ctx.graphics.endDraw();
   }
 }
